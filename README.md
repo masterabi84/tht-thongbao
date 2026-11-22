@@ -1,36 +1,27 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Website Trung tâm Ngoại ngữ Tin học THT
 
-## Getting Started
+Website giới thiệu trung tâm và đăng thông báo lịch khai giảng.
 
-First, run the development server:
+- Trang công khai: Giới thiệu, Khóa học, Khách hàng, Liên hệ, Thông báo (danh sách + chi tiết).
+- Người phụ trách đăng nhập và đăng thông báo ngay trên website; học viên mở link thông báo để đọc, không cần tài khoản.
+
+## Công nghệ
+
+- [Next.js 16](https://nextjs.org) (App Router, Cache Components)
+- Firebase Authentication (Email/Mật khẩu) và Cloud Firestore – project `tht-thongbao-6676`
+
+## Chạy trên máy
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+npm install
+npm run dev   # http://localhost:3000
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Cấu hình Firebase Web nằm trong `src/lib/firebase.ts` (cấu hình công khai của Firebase Web);
+có thể ghi đè bằng biến môi trường `NEXT_PUBLIC_FIREBASE_*`.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Phân quyền
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+- Collection `posts`: ai cũng đọc được; chỉ tài khoản được cấp quyền mới tạo được.
+- Collection `admins/{uid}`: danh sách tài khoản được cấp quyền, thêm qua Firebase Console.
+- Quyền được kiểm tra bằng Firestore Security Rules (quản lý ở repo cấu hình Firebase riêng).
